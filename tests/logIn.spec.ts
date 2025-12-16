@@ -1,10 +1,9 @@
-import { test } from '@playwright/test';
-import { LogIn } from '../src/logIn';
+import { logInTest } from '../src/constants';
 
-test('Login with Google', async ({ page }) => {
+logInTest('Login with Google', async ({ page, logIn }) => {
+    // Navigate to URL
     await page.goto(process.env.URL || '');
 
-    const logIn = new LogIn(page);
     await logIn.logInWithGoogle();
 
     // Storage State can be saved after login for reuse in other tests
