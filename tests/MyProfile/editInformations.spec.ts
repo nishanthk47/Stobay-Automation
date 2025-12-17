@@ -1,5 +1,4 @@
-import { myProfileTest } from "../src/constants";
-
+import { myProfileTest } from '../../src/constants';
 // Use the saved storage state 
 myProfileTest.use({ storageState: 'storageState.json' });
 

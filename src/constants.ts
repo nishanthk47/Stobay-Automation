@@ -1,6 +1,7 @@
 import { test as base } from '@playwright/test';
 import { LogIn } from './logIn';
 import { MyProfile } from './myProfile';
+import { Settings } from './settings';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -13,5 +14,12 @@ export const myProfileTest = base.extend<{ myProfile: MyProfile }>({
     myProfile: async ({ page }, use) => {
         const myProfileObj = new MyProfile(page);
         await use(myProfileObj);
+    },
+});
+
+export const settingsTest = base.extend<{ settings: Settings }>({
+    settings: async ({ page }, use) => {
+        const settingsObj = new Settings(page);
+        await use(settingsObj);
     },
 });
