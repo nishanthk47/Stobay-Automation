@@ -9,6 +9,7 @@ export class Settings {
     confirmationModal: Locator;
     yesDeleteButton: Locator;
     cancelButton: Locator;
+    logoutButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -18,6 +19,7 @@ export class Settings {
         this.confirmationModal = page.getByText('Are you sure?');
         this.yesDeleteButton = page.getByRole('button', { name: 'Yes, Delete' });
         this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+        this.logoutButton = page.getByText('Log Out');
     }
 
     async navigateToSettings() {
@@ -41,5 +43,13 @@ export class Settings {
             await this.cancelButton.click();
             console.info('Account deletion canceled!');
         }
+    }
+
+    async logOut() {
+        await this.profileVerified.click();
+        await this.logoutButton.click();
+        await this.page.waitForTimeout(2000); // Wait for 2 Seconds
+        await expect(this.page).toHaveURL('https://app.staging.stobay.ai/');
+        console.info('Logged out successfully!');
     }
 }
