@@ -30,3 +30,9 @@ myProfileTest('Edit Address Information', async ({ myProfile }) => {
     await myProfile.address_state('Tamil Nadu');
     await myProfile.expectNoFormErrors();
 });
+
+myProfileTest('Upload Profile Image', async ({ myProfile, page }) => {
+    await page.screenshot({ path: 'screenshots/existing_profile.png' });
+    await myProfile.uploadProfileImage();
+    await page.screenshot({ path: 'screenshots/updated_profile.png' });
+});

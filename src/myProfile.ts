@@ -24,6 +24,9 @@ export class MyProfile {
     cityInput: Locator;
     stateInput: Locator;
     noResultsFound: Locator;
+    profileImage: Locator;
+    imageUpload: Locator;
+    yesUploadButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -45,6 +48,9 @@ export class MyProfile {
         this.cityInput = page.locator('[id="city"]');
         this.stateInput = page.getByPlaceholder('Type to search');
         this.noResultsFound = page.locator('[class="p-2 text-gray-500"]');
+        this.profileImage = page.locator('path[d^="M3 9.854"]');
+        this.imageUpload = page.getByAltText('Preview');
+        this.yesUploadButton = page.getByRole('button', { name: 'Yes, Upload' });
     }
 
     async navigateToMyProfile() {
@@ -109,5 +115,13 @@ export class MyProfile {
         } else {
             await this.page.getByText(stateName).click();
         }
+    }
+
+    async uploadProfileImage() {
+        await this.profileImage.click();
+        await this.imageUpload.click();
+        await this.page.waitForTimeout(10000); // Wait for 10 Seconds to complete upload
+        await this.yesUploadButton.click();
+        console.info('Profile image uploaded successfully.');
     }
 }
