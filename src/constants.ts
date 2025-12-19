@@ -2,6 +2,7 @@ import { test as base } from '@playwright/test';
 import { LogIn } from './logIn';
 import { MyProfile } from './myProfile';
 import { Settings } from './settings';
+import { DataSource } from './dataSource';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -21,5 +22,12 @@ export const settingsTest = base.extend<{ settings: Settings }>({
     settings: async ({ page }, use) => {
         const settingsObj = new Settings(page);
         await use(settingsObj);
+    },
+});
+
+export const dataSourceTest = base.extend<{ dataSource: DataSource }>({
+    dataSource: async ({ page }, use) => {
+        const dataSourceObj = new DataSource(page);
+        await use(dataSourceObj);
     },
 });

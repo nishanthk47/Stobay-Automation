@@ -1,7 +1,6 @@
 import { Page, Locator } from 'playwright';
 import { expect } from '@playwright/test';
 
-
 export class MyProfile {
     gender: string = 'Male'; // Default gender (if needed change to Female || Other)
 
