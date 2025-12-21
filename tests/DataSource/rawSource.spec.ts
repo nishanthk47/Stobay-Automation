@@ -1,4 +1,4 @@
-import { dataSourceTest } from '../src/constants';
+import { dataSourceTest } from '../../src/constants';
 
 dataSourceTest.beforeAll(async ({ dataSource, page }) => {
     await page.goto('https://app.staging.stobay.ai/dashboard/');

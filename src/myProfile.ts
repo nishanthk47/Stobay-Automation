@@ -26,6 +26,7 @@ export class MyProfile {
     profileImage: Locator;
     imageUpload: Locator;
     yesUploadButton: Locator;
+    accountType: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -50,6 +51,7 @@ export class MyProfile {
         this.profileImage = page.locator('path[d^="M3 9.854"]');
         this.imageUpload = page.getByAltText('Preview');
         this.yesUploadButton = page.getByRole('button', { name: 'Yes, Upload' });
+        this.accountType = page.locator('[class="font-semibold md:text-xl text-base text-black"]');
     }
 
     async navigateToMyProfile() {
@@ -122,5 +124,11 @@ export class MyProfile {
         await this.page.waitForTimeout(10000); // Wait for 10 Seconds to complete upload
         await this.yesUploadButton.click();
         console.info('Profile image uploaded successfully.');
+    }
+
+    async planType() {
+        const planType = await this.accountType.textContent();
+        console.info(`Current account type is: ${planType}`);
+        return planType;
     }
 }

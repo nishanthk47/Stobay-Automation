@@ -3,6 +3,8 @@ import { LogIn } from './logIn';
 import { MyProfile } from './myProfile';
 import { Settings } from './settings';
 import { DataSource } from './dataSource';
+import { Bots } from '../src/bots';
+import { Leads } from './lead';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -29,5 +31,27 @@ export const dataSourceTest = base.extend<{ dataSource: DataSource }>({
     dataSource: async ({ page }, use) => {
         const dataSourceObj = new DataSource(page);
         await use(dataSourceObj);
+    },
+});
+
+export const botsTest = base.extend<{ bots: Bots }>({
+    bots: async ({ page }, use) => {
+        const botsObj = new Bots(page);
+        await use(botsObj);
+    },
+});
+
+export const leadsTest = base.extend<{ leads: Leads, bots: Bots, myProfile: MyProfile }>({
+    leads: async ({ page }, use) => {
+        const leadsObj = new Leads(page);
+        await use(leadsObj);
+    },
+    bots: async ({ page }, use) => {
+        const botsObj = new Bots(page);
+        await use(botsObj);
+    },
+    myProfile: async ({ page }, use) => {
+        const myProfileObj = new MyProfile(page);
+        await use(myProfileObj);
     },
 });

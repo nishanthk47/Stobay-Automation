@@ -3,9 +3,13 @@ import { settingsTest } from '../../src/constants';
 // Use the saved storage state 
 settingsTest.use({ storageState: 'storageState.json' });
 
-settingsTest.beforeAll(async ({ page }) => {
+settingsTest.beforeEach(async ({ page }) => {
     await page.goto('https://app.staging.stobay.ai/dashboard/');
     await page.waitForTimeout(2000); // Wait for 2 Seconds
+});
+
+settingsTest.afterEach(async ({ page }) => {
+    await page.close();
 });
 
 settingsTest('Delete User Account - Confirm Deletion', async ({ settings, page }) => {
