@@ -18,3 +18,9 @@ botsTest('Edit Existing Bot', async ({ bots }) => {
     await bots.editBot('EditedTestBot');
     await bots.formErrorCheck('True');
 });
+
+botsTest('Landing Page with bot creation', async ({ bots }) => {
+    await bots.botCreation('TestBot', 'TestBotUser', 'Sample Source'); // prvide a small case and without whitespaces
+    await bots.landingPage('NovaLanding', 'Test Business', '1234567890', 'Welcome to Test Business');
+    await bots.formErrorCheck('False');
+});

@@ -16,6 +16,13 @@ export class Bots {
     confimationYes: Locator;
     editButton: Locator;
     updateButton: Locator;
+    landingPageSection: Locator;
+    templateChoice: Locator;
+    novaLandingPage: Locator;
+    quantumEdgeLandingPage: Locator;
+    businessNameInput: Locator;
+    phoneNumberInput: Locator;
+    headerInput: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -32,6 +39,13 @@ export class Bots {
         this.confimationYes = page.getByRole('button', { name: 'Delete' });
         this.editButton = page.locator('path[d="M16.3828"]');
         this.updateButton = page.getByRole('button', { name: 'Update' });
+        this.landingPageSection = page.getByRole('button', { name: 'Landing Page' });
+        this.templateChoice = page.getByText('default', { exact: true });
+        this.novaLandingPage = page.getByText('NovaLanding', { exact: true });
+        this.quantumEdgeLandingPage = page.getByText('QuantumEdge', { exact: true });
+        this.businessNameInput = page.getByRole('textbox', { name: "e.g., John's Bakery" });
+        this.phoneNumberInput = page.getByRole('textbox', { name: 'e.g., 123-456-7890' });
+        this.headerInput = page.getByRole('textbox', { name: 'e.g., Welcome to my profile' });
     }
 
     async navigateToBots() {
@@ -112,6 +126,26 @@ export class Bots {
             console.info(`Source is exists, and Selected Successfully!`);
         } else {
             console.info('Username Not found in the list, Input a valid source.');
+        }
+    }
+
+    async landingPage(landingPageName: 'NovaLanding' | 'QuantumEdge', businessName: string, phoneNumber: string, header: string) {
+        await this.landingPageSection.click();
+        await this.page.waitForTimeout(500);  // wait for 0.5 Second
+
+        if (landingPageName === 'NovaLanding' || landingPageName === 'QuantumEdge') {
+            await this.templateChoice.click();
+
+            if (landingPageName === 'NovaLanding') {
+                await this.novaLandingPage.click();
+                console.info('NovaLanding page selected successfully.');
+            } else {
+                await this.quantumEdgeLandingPage.click();
+                console.info('QuantumEdge page selected successfully.');
+            }
+            await this.businessNameInput.fill(businessName);
+            await this.phoneNumberInput.fill(phoneNumber);
+            await this.headerInput.fill(header);
         }
     }
 }
