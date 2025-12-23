@@ -45,9 +45,10 @@ export class Leads {
         await expect(this.LeadVerified).toBeVisible();
         console.info('Navigated to Leads page successfully');
     }
-    async leadCapture(captureType: 'Sequential' | 'Keyword', chatCount?: number, keyword?: string) {
+
+    async leadCapture(title: string, userName: string, chooseSource: string, captureType: 'Sequential' | 'Keyword', chatCount?: number, keyword?: string,) {
         // Filling Bot deatils
-        await this.bots.botCreation('LeadBot', 'LeadBotUser', 'Sample Source');
+        await this.bots.botCreation(title, userName, chooseSource);
         await this.page.waitForTimeout(2000);
 
         // Lead capture
@@ -85,6 +86,7 @@ export class Leads {
             console.info(`Current Leads captured: ${currentLeadCount}`);
         }
     }
+
     async sentimentAnalysis(sentimentType: 'Natural' | 'Positive' | 'Negative') {
         await this.sentimentAll.click();
         await this.page.waitForTimeout(500); // Wait for 0.5 Seconds

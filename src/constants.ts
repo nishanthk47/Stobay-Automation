@@ -5,6 +5,7 @@ import { Settings } from './settings';
 import { DataSource } from './dataSource';
 import { Bots } from '../src/bots';
 import { Leads } from './lead';
+import { Chat } from '../src/chats';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -41,7 +42,7 @@ export const botsTest = base.extend<{ bots: Bots }>({
     },
 });
 
-export const leadsTest = base.extend<{ leads: Leads, bots: Bots, myProfile: MyProfile }>({
+export const leadsTest = base.extend<{ leads: Leads, bots: Bots, myProfile: MyProfile, chat: Chat }>({
     leads: async ({ page }, use) => {
         const leadsObj = new Leads(page);
         await use(leadsObj);
@@ -53,5 +54,9 @@ export const leadsTest = base.extend<{ leads: Leads, bots: Bots, myProfile: MyPr
     myProfile: async ({ page }, use) => {
         const myProfileObj = new MyProfile(page);
         await use(myProfileObj);
+    },
+    chat: async ({ page }, use) => {
+        const chatObj = new Chat(page);
+        await use(chatObj);
     },
 });
