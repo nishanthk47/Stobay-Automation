@@ -8,6 +8,7 @@ import { Leads } from './lead';
 import { Chat } from '../src/chats';
 import { LandingPage } from './landingPage';
 import { Business } from './business';
+import { Analytics } from '../src/analytics';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -79,4 +80,11 @@ export const businessTest = base.extend<{ business: Business }>({
         const businessObj = new Business(page);
         await use(businessObj);
     },
-}); 
+});
+
+export const analyticsTest = base.extend<{ analytics: Analytics }>({
+    analytics: async ({ page }, use) => {
+        const analyticsObj = new Analytics(page);
+        await use(analyticsObj);
+    },
+});
