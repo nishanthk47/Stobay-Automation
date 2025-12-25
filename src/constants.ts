@@ -7,6 +7,7 @@ import { Bots } from '../src/bots';
 import { Leads } from './lead';
 import { Chat } from '../src/chats';
 import { LandingPage } from './landingPage';
+import { Business } from './business';
 
 export const logInTest = base.extend<{ logIn: LogIn }>({
     logIn: async ({ page }, use) => {
@@ -72,3 +73,10 @@ export const landingPageTest = base.extend<{ landingPage: LandingPage, chat: Cha
         await use(chatObj);
     },
 });
+
+export const businessTest = base.extend<{ business: Business }>({
+    business: async ({ page }, use) => {
+        const businessObj = new Business(page);
+        await use(businessObj);
+    },
+}); 
