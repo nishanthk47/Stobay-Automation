@@ -31,7 +31,6 @@ landingPageTest.describe('Landing Page Tests', async () => {
         await landingPage.selectLandingPageTemplate('QuantumEdge');
         await chat.chatWithBot('Hello from Quantum Edge Landing Page', 1, 'Charlie', '1122334455', '123@gmail.com');
     });
-
 });
 
 landingPageTest.describe('Edit Landing Page Tests', async () => {
