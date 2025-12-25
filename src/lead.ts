@@ -94,7 +94,7 @@ export class Leads {
         // Natural Sentiment
         if (sentimentType === 'Natural') {
             await this.sentimentNatural.click();
-            await this.page.waitForTimeout(500);
+            await this.page.waitForTimeout(1000);
             if (await this.noLeadsMessage.isVisible()) {
                 console.info('No leads found for Natural Sentiment !!');
             } else {
@@ -105,7 +105,7 @@ export class Leads {
         else if (sentimentType === 'Positive') {
             // Positive Sentiment
             await this.sentimentPositive.click();
-            await this.page.waitForTimeout(500);
+            await this.page.waitForTimeout(1000);
             if (await this.noLeadsMessage.isVisible()) {
                 console.info('No leads found for Positive Sentiment !!');
             } else {
@@ -116,7 +116,7 @@ export class Leads {
         else {
             // Negative Sentiment
             await this.sentimentNegative.click();
-            await this.page.waitForTimeout(500);
+            await this.page.waitForTimeout(1000);
             if (await this.noLeadsMessage.isVisible()) {
                 console.info('No leads found for Negative Sentiment !!');
             } else {
