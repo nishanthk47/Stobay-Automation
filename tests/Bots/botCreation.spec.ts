@@ -1,8 +1,15 @@
 import { botsTest } from '../../src/constants';
 
-botsTest.beforeAll(async ({ bots, page }) => {
-    await page.goto('https://app.staging.stobay.ai/dashboard/');
+// Use the saved storage state 
+botsTest.use({ storageState: 'storageState.json' });
+
+botsTest.beforeEach(async ({ bots, page }) => {
+    await page.goto(process.env.DASHBOARD_URL || '');
     await bots.navigateToBots();
+});
+
+botsTest.afterEach(async ({ page }) => {
+    await page.close();
 });
 
 botsTest('Create a New Bot', async ({ bots }) => {

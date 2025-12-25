@@ -4,7 +4,7 @@ import { settingsTest } from '../../src/constants';
 settingsTest.use({ storageState: 'storageState.json' });
 
 settingsTest.beforeEach(async ({ page }) => {
-    await page.goto('https://app.staging.stobay.ai/dashboard/');
+    await page.goto(process.env.DASHBOARD_URL || '');
     await page.waitForTimeout(2000); // Wait for 2 Seconds
 });
 

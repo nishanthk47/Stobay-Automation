@@ -74,6 +74,7 @@ export class MyProfile {
         await this.mobileInput.fill(mobileNumber);
         await this.aboutYouInput.fill(aboutYou || ''); // Optional about you
     }
+
     async expectNoFormErrors() {
         await this.updateButton.click();
         await this.page.waitForTimeout(1000); // Wait for 1 Second

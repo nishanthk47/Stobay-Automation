@@ -74,6 +74,7 @@ export class Leads {
     }
 
     async leadCaptureVerification(leadCount: 'initialCount' | 'CurrentCount') {
+
         if (await this.noLeadsMessage.isVisible()) {
             console.info('No leads found !!');
             return;

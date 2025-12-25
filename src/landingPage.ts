@@ -38,6 +38,7 @@ export class LandingPage {
     }
 
     async selectLandingPageTemplate(landingPage: 'Default' | 'NovaLanding' | 'QuantumEdge') {
+
         if (landingPage === 'NovaLanding') {
             await this.selectLandingPage.nth(1).click();
             await this.page.waitForTimeout(2000);

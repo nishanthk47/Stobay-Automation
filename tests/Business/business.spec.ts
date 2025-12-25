@@ -1,10 +1,14 @@
 import { businessTest } from "../../src/constants";
 
-businessTest.beforeEach(async ({ business }) => {
+// Use the saved storage state 
+businessTest.use({ storageState: 'storageState.json' });
+
+businessTest.beforeEach(async ({ business, page }) => {
+    await page.goto(process.env.DASHBOARD_URL || '');
     await business.navigateToBusiness();
 });
 
-businessTest.afterEach(async ({ business, page }) => {
+businessTest.afterEach(async ({ page }) => {
     await page.close();
 });
 

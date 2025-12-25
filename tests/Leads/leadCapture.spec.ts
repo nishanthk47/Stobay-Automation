@@ -1,7 +1,10 @@
 import { leadsTest } from '../../src/constants';
 
-leadsTest.beforeEach(async ({ leads, myProfile, page }) => {
-    await page.goto('https://app.staging.stobay.ai/dashboard/');
+// Use the saved storage state 
+leadsTest.use({ storageState: 'storageState.json' });
+
+leadsTest.beforeAll(async ({ leads, myProfile, page }) => {
+    await page.goto(process.env.DASHBOARD_URL || '');
     const currentPlan = await myProfile.planType();
     if (currentPlan !== 'free') {
         await leads.navigateToLeads();
@@ -10,7 +13,7 @@ leadsTest.beforeEach(async ({ leads, myProfile, page }) => {
     }
 });
 
-leadsTest.afterEach(async ({ page }) => {
+leadsTest.afterAll(async ({ page }) => {
     await page.close();
 });
 

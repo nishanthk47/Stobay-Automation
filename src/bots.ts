@@ -79,6 +79,7 @@ export class Bots {
     }
 
     async formErrorCheck(edit: 'True' | 'False') {
+
         if (edit === 'True') {
             await this.updateButton.click();
             await this.page.waitForTimeout(500); // Wait for 0.5 Seconds

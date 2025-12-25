@@ -1,9 +1,10 @@
 import { myProfileTest } from '../../src/constants';
+
 // Use the saved storage state 
 myProfileTest.use({ storageState: 'storageState.json' });
 
 myProfileTest.beforeEach(async ({ myProfile, page }) => {
-    await page.goto('https://app.staging.stobay.ai/dashboard/');
+    await page.goto(process.env.DASHBOARD_URL || '');
     await page.waitForTimeout(2000); // Wait for 2 Seconds
     await myProfile.navigateToMyProfile();
 });

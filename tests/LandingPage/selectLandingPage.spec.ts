@@ -1,8 +1,13 @@
 import { landingPageTest } from '../../src/constants';
 
-landingPageTest.beforeEach(async ({ landingPage }) => {
+// Use the saved storage state 
+landingPageTest.use({ storageState: 'storageState.json' });
+
+landingPageTest.beforeEach(async ({ landingPage, page }) => {
+    await page.goto(process.env.DASHBOARD_URL || '');
     await landingPage.navigateToLandingPage();
 });
+
 landingPageTest.afterEach(async ({ page }) => {
     await page.close();
 });
