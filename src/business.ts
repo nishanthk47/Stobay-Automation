@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 
 export class Business {
     page: Page;
+    upgradePlanButton: Locator;
     businessTab: Locator;
     businessVerified: Locator;
     editbutton: Locator;
@@ -23,6 +24,7 @@ export class Business {
 
     constructor(page: Page) {
         this.page = page;
+        this.upgradePlanButton = page.getByRole('button', { name: 'Upgrade Plan' });
         this.businessTab = page.locator('div').filter({ hasText: 'Stobay Business' }).first();
         this.businessVerified = page.locator('div.relative.rounded-lg.p-6.md\:p-4.xl\:p-6.flex.flex-col.bg-gray-50.shadow.cursor-pointer.transition.w-full.sm\:w-\[calc\(50\%_-_12px\)\].lg\:w-\[calc\(33\.33\%_-_18px\)\]');
         this.editbutton = page.getByRole('button', { name: 'Edit' });
@@ -43,6 +45,12 @@ export class Business {
     }
 
     async navigateToBusiness() {
+        // Check plan is upgraded or not
+        if (await this.upgradePlanButton.isVisible()) {
+            console.info('Stobay Business is not available for Free plan users.');
+            return;
+        }
+
         await this.businessTab.click();
         await this.page.waitForTimeout(2000); // Wait for 2 Seconds
         await expect(this.businessVerified).toBeVisible();

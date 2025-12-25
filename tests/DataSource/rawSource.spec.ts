@@ -16,6 +16,14 @@ dataSourceTest('Upload Raw Source File', async ({ dataSource }) => {
     await dataSource.uploadDataSourceFile();
 });
 
+dataSourceTest('Import from Social Link', async ({ dataSource }) => {
+    await dataSource.importFromSocialLink();
+});
+
+dataSourceTest('Import from Web URL', async ({ dataSource }) => {
+    await dataSource.importWebURL();
+});
+
 dataSourceTest('Delete Source File', async ({ dataSource }) => {
     await dataSource.deleteDataSourceFile();
 });

@@ -1,8 +1,10 @@
 import { Page, Locator } from 'playwright';
 import { expect } from '@playwright/test';
+import { MyProfile } from './myProfile';
 
 export class LandingPage {
     page: Page;
+    myProfile: MyProfile;
     landingPageTab: Locator;
     landingPageVerified: Locator;
     selectLandingPage: Locator;
@@ -17,6 +19,7 @@ export class LandingPage {
 
     constructor(page: Page) {
         this.page = page;
+        this.myProfile = new MyProfile(page);
         this.landingPageTab = page.locator('div').filter({ hasText: 'Landing Page' }).first();
         this.landingPageVerified = page.getByText('Pick Your Landing Page', { exact: true });
         this.selectLandingPage = page.locator('path[d^="M6.30147"]');
@@ -57,6 +60,15 @@ export class LandingPage {
     }
 
     async editLandingPage(LandingPageName: 'NovaLanding' | 'QuantumEdge', businessName: string, phoneNumber: string, header: string) {
+        // Check the current plan type
+        await this.myProfile.navigateToMyProfile();
+        const currentPlan = await this.myProfile.planType();
+        if (currentPlan === 'free') {
+            console.info('Import from Social Link is not available for Free plan users.');
+            return;
+        } else {
+            await this.page.goBack(); // Navigate back to Landing Page
+        }
 
         if (LandingPageName === 'NovaLanding') {
             await this.editButton.first().click();

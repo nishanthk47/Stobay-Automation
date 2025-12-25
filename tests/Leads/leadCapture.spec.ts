@@ -5,10 +5,13 @@ leadsTest.use({ storageState: 'storageState.json' });
 
 leadsTest.beforeAll(async ({ leads, myProfile, page }) => {
     await page.goto(process.env.DASHBOARD_URL || '');
+    await myProfile.navigateToMyProfile();
     const currentPlan = await myProfile.planType();
     if (currentPlan !== 'free') {
         await leads.navigateToLeads();
         await leads.leadCaptureVerification('initialCount');
+    } else {
+        console.info('Lead Capture tests are skipped for Free plan users.');
         return;
     }
 });
